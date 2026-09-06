@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Алексею 11 — приглашение на день рождения</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Russo+One&family=Rubik:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --space:#0B1A3A;
+    --nebula:#4A2FB5;
+    --cyan:#5CE6FF;
+    --flame:#FF8A3D;
+    --star:#F6F8FF;
+    --moon:#C7CEE6;
+    --ink:#0B1A3A;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{min-height:100%}
+  body{
+    font-family:"Rubik",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+    color:var(--star);
+    background:var(--space);
+    display:flex;align-items:center;justify-content:center;
+    padding:24px 16px;
+    overflow-x:hidden;
+    position:relative;
+  }
+
+  /* ---- фон: космос ---- */
+  .sky{
+    position:fixed;inset:0;z-index:0;overflow:hidden;
+    background:
+      radial-gradient(ellipse 60% 45% at 78% 22%, rgba(92,230,255,.20), transparent 70%),
+      radial-gradient(ellipse 70% 55% at 15% 85%, rgba(255,138,61,.16), transparent 70%),
+      radial-gradient(ellipse 90% 70% at 50% 50%, rgba(74,47,181,.45), transparent 75%),
+      linear-gradient(160deg,#071331 0%, var(--space) 45%, #1A1050 100%);
+  }
+  .sky svg{position:absolute;inset:0;width:100%;height:100%}
+  .twinkle{animation:twinkle 3.2s ease-in-out infinite}
+  .twinkle.t2{animation-duration:4.6s;animation-delay:-1.3s}
+  .twinkle.t3{animation-duration:2.6s;animation-delay:-2.1s}
+  @keyframes twinkle{0%,100%{opacity:.35}50%{opacity:1}}
+
+  .comet{
+    position:fixed;z-index:0;left:-20%;top:14%;
+    width:22vw;max-width:340px;height:3px;border-radius:3px;
+    background:linear-gradient(90deg,transparent,rgba(92,230,255,.0) 20%,rgba(92,230,255,.9) 90%,#fff);
+    transform:rotate(-14deg);
+    animation:comet 1.8s cubic-bezier(.2,.7,.3,1) .6s 1 forwards;
+    opacity:0;
+  }
+  @keyframes comet{
+    0%{left:-20%;top:14%;opacity:0}
+    10%{opacity:1}
+    100%{left:105%;top:2%;opacity:0}
+  }
+
+  /* ---- билет ---- */
+  .ticket{
+    position:relative;z-index:1;
+    width:100%;max-width:560px;
+    background:linear-gradient(180deg,rgba(11,26,58,.72),rgba(15,22,60,.86));
+    border:1.5px solid rgba(92,230,255,.35);
+    border-radius:28px;
+    padding:44px 40px 36px;
+    box-shadow:0 0 0 6px rgba(92,230,255,.06),0 40px 90px rgba(0,0,0,.55);
+    backdrop-filter:blur(6px);
+    overflow:hidden;
+    animation:land .9s cubic-bezier(.2,.8,.3,1) 1 both;
+    text-align:center;
+  }
+  @keyframes land{from{opacity:0;transform:translateY(28px) scale(.98)}to{opacity:1;transform:none}}
+
+  /* планета в углу */
+  .planet{
+    position:absolute;right:-90px;top:-90px;width:260px;height:260px;
+    pointer-events:none;
+  }
+
+  /* ракета */
+  .rocket{
+    width:84px;height:84px;margin:0 auto 6px;display:block;
+    animation:hover 4s ease-in-out infinite;
+    position:relative;
+  }
+  @keyframes hover{0%,100%{transform:translateY(0) rotate(-6deg)}50%{transform:translateY(-10px) rotate(-6deg)}}
+  .flame{transform-origin:50% 0;animation:flame .35s ease-in-out infinite alternate}
+  @keyframes flame{from{transform:scaleY(.85)}to{transform:scaleY(1.15)}}
+
+  .mission{
+    font-size:14px;color:var(--cyan);letter-spacing:.02em;margin-bottom:10px;
+  }
+  h1{
+    font-family:"Russo One","Rubik",sans-serif;
+    font-weight:400;
+    font-size:clamp(46px,11vw,72px);
+    line-height:.95;
+    color:#fff;
+    text-shadow:0 0 24px rgba(92,230,255,.45),0 4px 0 rgba(0,0,0,.35);
+    margin-bottom:14px;
+  }
+  .tag{
+    font-family:"Russo One","Rubik",sans-serif;
+    font-size:clamp(17px,4.4vw,22px);
+    color:var(--flame);
+    letter-spacing:.01em;
+    margin-bottom:22px;
+  }
+  .lead{
+    font-size:17px;line-height:1.5;color:var(--moon);
+    max-width:40ch;margin:0 auto 30px;
+  }
+
+  /* блок с данными */
+  .info{
+    list-style:none;text-align:left;
+    display:grid;gap:14px;
+    background:rgba(92,230,255,.06);
+    border:1px solid rgba(92,230,255,.22);
+    border-radius:18px;
+    padding:20px 22px;
+    margin-bottom:26px;
+  }
+  .info li{display:grid;grid-template-columns:34px 1fr;gap:14px;align-items:start}
+  .info svg{width:30px;height:30px;margin-top:1px}
+  .info b{display:block;font-weight:700;font-size:18px;color:#fff;line-height:1.25}
+  .info span{display:block;font-size:14.5px;color:var(--moon);line-height:1.4;margin-top:2px}
+
+  .rsvp{
+    font-size:16px;line-height:1.5;color:#fff;
+  }
+  .rsvp a{color:var(--cyan);text-decoration:none;font-weight:700;border-bottom:1.5px dashed rgba(92,230,255,.5)}
+  .rsvp .msg{display:block;font-size:14px;color:var(--moon);margin-top:6px}
+  .rsvp a:focus-visible{outline:2px solid var(--flame);outline-offset:3px;border-radius:4px}
+  .note{
+    margin-top:22px;padding-top:18px;
+    border-top:1px dashed rgba(199,206,230,.3);
+    font-size:14px;color:var(--moon);line-height:1.5;
+  }
+  .note strong{color:var(--flame);font-weight:700}
+
+  @media (max-width:480px){
+    .ticket{padding:36px 22px 28px;border-radius:22px}
+    .planet{right:-110px;top:-110px;width:220px;height:220px}
+    .info{padding:16px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .twinkle,.rocket,.flame,.comet,.ticket{animation:none}
+    .comet{display:none}
+  }
+  @media print{
+    body{background:var(--space) !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;padding:0}
+    .sky{position:absolute}
+    .comet{display:none}
+    .ticket{box-shadow:none;backdrop-filter:none;background:#0F163C}
+  }
+</style>
+</head>
+<body>
+
+<div class="sky" aria-hidden="true">
+  <svg id="stars" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice"></svg>
+</div>
+<div class="comet" aria-hidden="true"></div>
+
+<main class="ticket">
+
+  <!-- планета с кольцами -->
+  <svg class="planet" viewBox="0 0 260 260" aria-hidden="true">
+    <defs>
+      <radialGradient id="pg" cx="38%" cy="35%" r="70%">
+        <stop offset="0" stop-color="#FFB37A"/>
+        <stop offset=".55" stop-color="#FF8A3D"/>
+        <stop offset="1" stop-color="#7A2E9E"/>
+      </radialGradient>
+      <linearGradient id="rg" x1="0" x2="1">
+        <stop offset="0" stop-color="#5CE6FF" stop-opacity=".15"/>
+        <stop offset=".5" stop-color="#5CE6FF" stop-opacity=".9"/>
+        <stop offset="1" stop-color="#5CE6FF" stop-opacity=".15"/>
+      </linearGradient>
+    </defs>
+    <ellipse cx="130" cy="130" rx="130" ry="30" fill="none" stroke="url(#rg)" stroke-width="10" transform="rotate(-22 130 130)" opacity=".9"/>
+    <circle cx="130" cy="130" r="78" fill="url(#pg)"/>
+    <ellipse cx="130" cy="130" rx="130" ry="30" fill="none" stroke="url(#rg)" stroke-width="10" transform="rotate(-22 130 130)" stroke-dasharray="0 230 400 0"/>
+    <ellipse cx="105" cy="105" rx="42" ry="18" fill="#fff" opacity=".12" transform="rotate(-20 105 105)"/>
+    <circle cx="160" cy="150" r="9" fill="#7A2E9E" opacity=".35"/>
+    <circle cx="112" cy="158" r="6" fill="#7A2E9E" opacity=".3"/>
+  </svg>
+
+  <!-- ракета -->
+  <svg class="rocket" viewBox="0 0 96 96" aria-hidden="true">
+    <g class="flame">
+      <path d="M40 74 Q48 96 56 74 Z" fill="#FF8A3D"/>
+      <path d="M44 74 Q48 88 52 74 Z" fill="#FFE27A"/>
+    </g>
+    <path d="M48 8 C62 22 66 44 62 66 H34 C30 44 34 22 48 8 Z" fill="#F6F8FF"/>
+    <path d="M48 8 C56 20 60 36 60 52 L48 52 Z" fill="#DCE2F5"/>
+    <path d="M34 50 L20 66 L34 66 Z" fill="#FF8A3D"/>
+    <path d="M62 50 L76 66 L62 66 Z" fill="#FF8A3D"/>
+    <rect x="40" y="66" width="16" height="8" rx="2" fill="#4A2FB5"/>
+    <circle cx="48" cy="36" r="9" fill="#0B1A3A" stroke="#5CE6FF" stroke-width="3"/>
+    <circle cx="45" cy="33" r="3" fill="#5CE6FF" opacity=".7"/>
+  </svg>
+
+  <p class="mission">Полётное задание № 11</p>
+  <h1>Алексею<br>11 лет!</h1>
+  <p class="tag">Гравитация отменяется</p>
+
+  <p class="lead">
+    Приглашаю тебя на мой день рождения в батутный центр.
+    Будем прыгать выше, чем на Луне, и не приземлимся до самого торта.
+  </p>
+
+  <ul class="info">
+    <li>
+      <svg viewBox="0 0 32 32" aria-hidden="true">
+        <rect x="4" y="7" width="24" height="21" rx="4" fill="none" stroke="#5CE6FF" stroke-width="2.2"/>
+        <path d="M4 13h24" stroke="#5CE6FF" stroke-width="2.2"/>
+        <path d="M10 4v6M22 4v6" stroke="#5CE6FF" stroke-width="2.2" stroke-linecap="round"/>
+        <circle cx="16" cy="20" r="3" fill="#FF8A3D"/>
+      </svg>
+      <div>
+        <b>14 сентября, понедельник</b>
+        <span>Старт в 15:00, полёт продлится 3 часа</span>
+      </div>
+    </li>
+    <li>
+      <svg viewBox="0 0 32 32" aria-hidden="true">
+        <path d="M16 3c-6 0-10 5-10 11 0 8 10 15 10 15s10-7 10-15c0-6-4-11-10-11z" fill="none" stroke="#5CE6FF" stroke-width="2.2"/>
+        <circle cx="16" cy="14" r="4" fill="#FF8A3D"/>
+      </svg>
+      <div>
+        <b>Батут Парк «Царский»</b>
+        <span>бул. Гагарина, 74</span>
+      </div>
+    </li>
+    <li>
+      <svg viewBox="0 0 32 32" aria-hidden="true">
+        <path d="M6 22c6 4 14 4 20 0" fill="none" stroke="#5CE6FF" stroke-width="2.2" stroke-linecap="round"/>
+        <path d="M6 22v3M26 22v3" stroke="#5CE6FF" stroke-width="2.2" stroke-linecap="round"/>
+        <path d="M16 8v8" stroke="#FF8A3D" stroke-width="2.4" stroke-linecap="round"/>
+        <circle cx="16" cy="6" r="2.6" fill="#FF8A3D"/>
+        <path d="M11 13l5 3 5-3" fill="none" stroke="#FF8A3D" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <div>
+        <b>Что взять с собой</b>
+        <span>Обязательно сменную обувь и носки, плюс удобную спортивную одежду</span>
+      </div>
+    </li>
+  </ul>
+
+  <p class="rsvp">
+    Скажи, полетишь ли ты с нами, до 11 сентября:<br>
+    <a href="tel:+79025116020">+7 902 511-60-20</a>, папа Александр<br><span class="msg">Удобнее написать в Telegram или Макс</span>
+  </p>
+
+  <p class="note">
+    Экипаж набирается ограниченный, поэтому <strong>ждём подтверждения</strong>. Родители могут остаться в зоне ожидания центра или забрать космонавта после посадки.
+  </p>
+</main>
+
+<script>
+  // Генерируем звёздное небо: без JS остаётся градиентный фон
+  (function(){
+    var svg=document.getElementById('stars');if(!svg)return;
+    var ns='http://www.w3.org/2000/svg',W=1200,H=800,N=230,html='';
+    function rnd(a,b){return a+Math.random()*(b-a)}
+    for(var i=0;i<N;i++){
+      var x=rnd(0,W).toFixed(1),y=rnd(0,H).toFixed(1),r=rnd(.5,1.9).toFixed(2);
+      var cls=i%3===0?'twinkle':(i%7===0?'twinkle t2':(i%11===0?'twinkle t3':''));
+      var col=i%13===0?'#5CE6FF':(i%17===0?'#FFD9B8':'#F6F8FF');
+      html+='<circle cx="'+x+'" cy="'+y+'" r="'+r+'" fill="'+col+'" opacity="'+rnd(.4,1).toFixed(2)+'" class="'+cls+'"/>';
+    }
+    // несколько крупных четырёхлучевых звёзд
+    for(var j=0;j<6;j++){
+      var sx=rnd(60,W-60),sy=rnd(40,H-40),s=rnd(6,12);
+      html+='<path class="twinkle t2" fill="#fff" opacity=".9" d="M'+sx+' '+(sy-s)+' Q'+sx+' '+sy+' '+(sx+s)+' '+sy+' Q'+sx+' '+sy+' '+sx+' '+(sy+s)+' Q'+sx+' '+sy+' '+(sx-s)+' '+sy+' Q'+sx+' '+sy+' '+sx+' '+(sy-s)+' Z"/>';
+    }
+    svg.innerHTML=html;
+  })();
+</script>
+</body>
+</html>
